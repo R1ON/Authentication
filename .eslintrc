@@ -1,0 +1,51 @@
+{
+  "parser": "typescript-eslint-parser",
+  "extends": [
+    "airbnb",
+    "plugin:unicorn/recommended"
+  ],
+  "plugins": ["unicorn"],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "rules": {
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["to"],
+        "aspects": ["noHref", "invalidHref", "preferButton"]
+      }
+    ],
+    "react/jsx-filename-extension": "off",
+    "unicorn/filename-case": "off",
+    "import/extensions": { "ts": "never", "tsx": "never" },
+    "no-use-before-define": "warn",
+    "no-param-reassign": "warn",
+    "no-restricted-globals": ["error", "event"],
+    "import/no-unresolved": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".ts", ".tsx"]
+      }
+    }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "parser": "typescript-eslint-parser",
+      "rules": {
+        "no-undef": "off"
+      }
+    }
+  ]
+}
