@@ -26,7 +26,7 @@
     ],
     "react/jsx-filename-extension": "off",
     "unicorn/filename-case": "off",
-    "import/extensions": { "ts": "never", "tsx": "never" },
+    "import/extensions": "off",
     "no-use-before-define": "warn",
     "no-param-reassign": "warn",
     "no-restricted-globals": ["error", "event"],
