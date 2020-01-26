@@ -27,46 +27,19 @@ const optimization = () => {
 
 const filename = ext => (!isProduction ? `[name].${ext}` : `[name].[hash].${ext}`);
 
-const cssLoaders = (extra) => {
-  const loaders = [
-    {
-      loader: MiniCssExtractPlugin.loader,
-      options: {
-        hmr: !isProduction,
-        reloadAll: true,
-      },
-    },
-    'css-loader',
-  ];
-
-  if (extra) {
-    loaders.push(extra);
-  }
-
-  return loaders;
-};
-
-const babelOptions = (preset) => {
-  const opts = {
-    presets: [
-      '@babel/preset-env',
-    ],
-    plugins: [
-      '@babel/plugin-proposal-class-properties',
-    ],
-  };
-
-  if (preset) {
-    opts.presets.push(preset);
-  }
-
-  return opts;
-};
-
 const jsLoaders = () => {
   const loaders = [{
     loader: 'babel-loader',
-    options: babelOptions(),
+    options: {
+      presets: [
+        '@babel/preset-env',
+        '@babel/preset-react',
+        '@babel/preset-typescript',
+      ],
+      plugins: [
+        '@babel/plugin-proposal-class-properties',
+      ],
+    },
   }];
 
   if (!isProduction) {
@@ -108,37 +81,27 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: cssLoaders(),
-      },
-      {
-        test: /\.s[ac]ss$/,
-        use: cssLoaders('sass-loader'),
+        test: /\.(css|s[ac]ss)$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: !isProduction,
+              reloadAll: true,
+            },
+          },
+          'css-loader',
+          'sass-loader',
+        ],
       },
       {
         test: /\.(ttf|woff|woff2|eot|png|jpg|svg|gif)$/,
         use: ['file-loader'],
       },
       {
-        test: /\.js$/,
+        test: /\.(tsx?|jsx?)$/,
         exclude: /node_modules/,
         use: jsLoaders(),
-      },
-      {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        loader: {
-          loader: 'babel-loader',
-          options: babelOptions('@babel/preset-typescript'),
-        },
-      },
-      {
-        test: /\.jsx$/,
-        exclude: /node_modules/,
-        loader: {
-          loader: 'babel-loader',
-          options: babelOptions('@babel/preset-react'),
-        },
       },
     ],
   },

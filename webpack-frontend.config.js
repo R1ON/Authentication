@@ -8,7 +8,7 @@ module.exports = {
     client: ['@babel/polyfill', './frontend/index.tsx'],
   },
   devServer: {
-    port: 6666,
+    port: 8080,
     hot: !isProduction,
   },
 };

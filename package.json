@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "frontend:watch": "cross-env NODE_ENV=development webpack --config webpack-frontend.config.js --watch",
+    "frontend:watch": "cross-env NODE_ENV=development webpack-dev-server --config webpack-frontend.config.js --open --mode development",
     "frontend:build": "cross-env NODE_ENV=production webpack --config webpack-frontend.config.js --mode production",
     "--------------": "",
-    "backend:watch": "cross-env NODE_ENV=development webpack --config webpack-backend.config.js --watch",
+    "backend:watch": "cross-env NODE_ENV=development webpack --config webpack-backend.config.js --watch --mode development",
     "backend:build": "cross-env NODE_ENV=production webpack --config webpack-backend.config.js --mode production",
     "-------------": "",
-    "build-all": "npm run frontend:build & npm run backend:build"
+    "build": "npm run frontend:build & npm run backend:build"
   },
   "dependencies": {
     "@babel/polyfill": "7.8.3",
@@ -52,6 +52,7 @@
     "nodemon": "2.0.2",
     "nodemon-webpack-plugin": "4.2.2",
     "optimize-css-assets-webpack-plugin": "5.0.3",
+    "sass-loader": "8.0.2",
     "style-loader": "1.1.2",
     "terser-webpack-plugin": "2.3.2",
     "typescript": "3.7.5",
