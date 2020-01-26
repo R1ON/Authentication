@@ -43,7 +43,12 @@ const jsLoaders = () => {
   }];
 
   if (!isProduction) {
-    loaders.push('eslint-loader');
+    loaders.push({
+      loader: 'eslint-loader',
+      options: {
+        emitWarning: true,
+      },
+    });
   }
 
   return loaders;

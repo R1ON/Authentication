@@ -1,33 +1,24 @@
 import express from 'express';
 
-const router = express.Router();
-// const express = require('express');
-// import express from 'express';
-//
-// const router = express.Router();
-// const Request = express.Request();
-//
-//
-// // // api/auth/register
-// router.post('/register', async (req: Request, res: express.Response) => {
-//   try {
-//
-//   } catch (e) {
-//     res.status(500).json({ error: true, message: e.message });
-//   }
-// // });
-// //
-// // // api/auth/login
-// // // router.post('/login', async (req: express.Request, res: express.Response) => {
-// // //   try {
-// // //
-// // //   } catch (e) {
-// // //     res.status(500).json({ error: true, message: e.message });
-// // //   }
-// // // });
-// //
-// module.exports = router;
-// export {};
+const Router = express.Router();
 
-export default router;
+// api/auth/register
+Router.post('/register', async (req: express.Request, res: express.Response) => {
+  try {
+    console.log('test');
+  } catch (error) {
+    res.status(500).json({ error: true, message: error.message });
+  }
+});
+
+// api/auth/login
+Router.post('/login', async (req: express.Request, res: express.Response) => {
+  try {
+    console.log('test');
+  } catch (error) {
+    res.status(500).json({ error: true, message: error.message });
+  }
+});
+
+export default Router;
 
