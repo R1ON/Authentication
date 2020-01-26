@@ -1,5 +1,5 @@
 {
-  "parser": "typescript-eslint-parser",
+  "parser": "@typescript-eslint/parser",
   "extends": [
     "airbnb",
     "plugin:unicorn/recommended"
@@ -30,7 +30,8 @@
     "no-use-before-define": "warn",
     "no-param-reassign": "warn",
     "no-restricted-globals": ["error", "event"],
-    "import/no-unresolved": "off"
+    "import/no-unresolved": "off",
+    "import/no-extraneous-dependencies": "off"
   },
   "settings": {
     "import/resolver": {
@@ -42,7 +43,7 @@
   "overrides": [
     {
       "files": ["**/*.ts", "**/*.tsx"],
-      "parser": "typescript-eslint-parser",
+      "parser": "@typescript-eslint/parser",
       "rules": {
         "no-undef": "off"
       }
