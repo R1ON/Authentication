@@ -5,6 +5,6 @@
     "tslint-react"
   ],
   "linterOptions": {
-    "exclude": ["config/**/*.js", "node_modules"]
+    "exclude": ["config", "node_modules"]
   }
 }
