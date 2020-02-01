@@ -2,15 +2,15 @@
 
 # Start frontend only
 ```
-    yarn run frontend:watch
+    yarn run frontend:packages && yarn run frontend:watch
 ```
 
 # Start backend only
 ```
-    yarn run backend:watch
+    yarn run backend:packages && yarn run backend:watch
 ```
 
 # Build frontend + backend
 ```
-    yarn run build
+    yarn run packages & yarn run build
 ```
