@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "src/index.ts",
   "scripts": {
-    "watch": "cross-env NODE_ENV=development webpack --watch --mode development",
-    "build": "cross-env NODE_ENV=production webpack --mode production"
+    "watch": "cross-env NODE_ENV=development IS_BACKEND=true webpack --watch",
+    "build": "cross-env NODE_ENV=production IS_BACKEND=true webpack --mode production",
+    "packages": "yarn install"
   },
   "dependencies": {
     "config": "3.2.4",

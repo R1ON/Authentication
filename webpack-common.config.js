@@ -2,15 +2,13 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 
-// TODO: не запускается бэк
-// TODO: install modules only front + only back
-
 const isProduction = process.env.NODE_ENV === 'production';
+const isBackend = process.env.IS_BACKEND;
 
 const filename = ext => (!isProduction ? `[name].${ext}` : `[name].[hash].${ext}`);
 
 const optimization = () => {
-  const config = {
+  const config = isBackend ? {} : {
     splitChunks: {
       chunks: 'all',
     },
@@ -62,9 +60,7 @@ module.exports = {
       filename: filename('js'),
       path: path.resolve(__dirname, 'build'),
     },
-    plugins: [
-      new CleanWebpackPlugin(),
-    ],
+    plugins: [new CleanWebpackPlugin()],
     optimization: optimization(),
     module: {
       rules: [

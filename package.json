@@ -1,17 +1,19 @@
 {
   "name": "authentication",
   "version": "1.0.0",
+  "license": "MIT",
   "private": true,
   "scripts": {
-    "frontend:modules": "yarn workspace @frontend/app install",
+    "frontend:packages": "yarn workspace @frontend/app packages",
     "frontend:watch": "yarn workspace @frontend/app watch",
     "frontend:build": "yarn workspace @frontend/app build",
     "--------------": "",
+    "backend:packages": "yarn workspace @backend/app packages",
     "backend:watch": "yarn workspace @backend/app watch",
     "backend:build": "yarn workspace @backend/app build",
     "-------------": "",
     "build": "yarn run frontend:build & yarn run backend:build",
-    "modules": "yarn cache clean & yarn install"
+    "packages": "yarn cache clean & yarn install"
   },
   "workspaces": [
     "packages/*"
@@ -40,7 +42,6 @@
     "typescript": "3.7.5",
     "terser-webpack-plugin": "2.3.2",
     "webpack": "4.41.5",
-    "webpack-cli": "3.3.10",
-    "webpack-dev-server": "3.10.1"
+    "webpack-cli": "3.3.10"
   }
 }
