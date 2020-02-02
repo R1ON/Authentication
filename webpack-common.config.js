@@ -1,9 +1,11 @@
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
+
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
-const isBackend = process.env.IS_BACKEND;
+const isBackend = process.env.OPTION === 'backend';
 
 const filename = ext => (!isProduction ? `[name].${ext}` : `[name].[hash].${ext}`);
 
@@ -41,9 +43,6 @@ const jsLoaders = () => {
   if (!isProduction) {
     loaders.push({
       loader: 'eslint-loader',
-      options: {
-        emitWarning: true,
-      },
     });
   }
 
@@ -60,7 +59,10 @@ module.exports = {
       filename: filename('js'),
       path: path.resolve(__dirname, 'build'),
     },
-    plugins: [new CleanWebpackPlugin()],
+    plugins: [
+      new CleanWebpackPlugin(),
+      new Dotenv(),
+    ],
     optimization: optimization(),
     module: {
       rules: [
