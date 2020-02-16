@@ -2,11 +2,13 @@
   "parser": "@typescript-eslint/parser",
   "extends": [
     "airbnb",
+    "plugin:react/recommended",
     "plugin:unicorn/recommended"
   ],
-  "plugins": ["unicorn"],
+  "plugins": ["unicorn", "react"],
   "parserOptions": {
     "sourceType": "module",
+    "ecmaVersion": 6,
     "ecmaFeatures": {
       "jsx": true
     }
@@ -31,7 +33,9 @@
     "no-param-reassign": "warn",
     "no-restricted-globals": ["error", "event"],
     "import/no-unresolved": "off",
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "unicorn/consistent-function-scoping": "off",
+    "react/jsx-props-no-spreading": "off"
   },
   "settings": {
     "import/resolver": {
