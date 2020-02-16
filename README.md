@@ -1,4 +1,5 @@
-# simple readme
+# Authentication
+Simple authentication application with theme and locale settings.
 
 # Start frontend only
 ```
