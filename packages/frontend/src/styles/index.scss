@@ -1,3 +1,28 @@
-body {
-  background: lightblue;
+@import './vars';
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.registration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: inherit;
+  background: $bg-light-gray;
+
+  &__form {
+
+  }
+}
+
+.form {
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: $bg-white;
+  box-shadow: -15px 10px 30px -8px rgba(0, 0, 0, .2);
 }

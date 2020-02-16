@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import 'normalize.css';
+
 import App from './containers/App';
 
 import '../styles/index.scss';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const root = document.querySelector('#root');
+
+ReactDOM.render(<App />, root);
