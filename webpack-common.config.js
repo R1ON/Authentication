@@ -43,6 +43,9 @@ const jsLoaders = () => {
   if (!isProduction) {
     loaders.push({
       loader: 'eslint-loader',
+      options: {
+        emitWarning: true,
+      },
     });
   }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { hydrate } from 'react-dom';
 
 import 'normalize.css';
 
@@ -9,4 +9,4 @@ import '../styles/index.scss';
 
 const root = document.querySelector('#root');
 
-ReactDOM.render(<App />, root);
+hydrate(<App />, root);

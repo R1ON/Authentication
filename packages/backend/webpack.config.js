@@ -9,7 +9,8 @@ module.exports = {
   context: path.resolve(__dirname, 'src'),
   target: 'node',
   entry: {
-    server: ['@babel/polyfill', './index.ts'],
+    server: ['@babel/polyfill', '../../frontend/src/server/index.js'], // TODO: ПОПРАВЬ ПЛЕЗ
+    // server: ['@babel/polyfill', './index.ts'],
   },
   plugins: [...config.plugins, new NodemonPlugin()],
   externals: [nodeExternals()],
