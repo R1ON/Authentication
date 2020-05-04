@@ -33,10 +33,10 @@ const App: React.FC = () => {
     <IntlProvider locale={locale} messages={messages}>
       <header>
         <button type="button" onClick={changeLocaleHandler(LOCALE.ru)}>
-          <RussianFlagIcon style={{width: '20px'}} />
+          <RussianFlagIcon style={{ width: '20px' }} />
         </button>
         <button type="button" onClick={changeLocaleHandler(LOCALE.en)}>
-          <AmericanFlagIcon style={{width: '20px'}} />
+          <AmericanFlagIcon style={{ width: '20px' }} />
         </button>
       </header>
       <RegistrationFormContainer />
