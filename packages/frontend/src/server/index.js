@@ -10,11 +10,11 @@ const app = express();
 
 app.use(helmet());
 
+// TODO: перевести файл в .ts
+// TODO: попробовать прочитать эту разметку из public/index.html
+
 app.get('*', (request, response) => {
   const markup = renderToString(<App />);
-
-  // TODO: перевести файл в .ts
-  // TODO: добавить алиасы
 
   response.send(
     `
