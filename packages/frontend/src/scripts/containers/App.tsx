@@ -3,6 +3,8 @@ import { IntlProvider } from 'react-intl';
 
 import RegistrationFormContainer from './RegistrationFormContainer';
 
+import style from './test.module.css';
+
 import { RussianFlagIcon, AmericanFlagIcon } from '../icons';
 import russianLocale from '../../messages/ru.json';
 import englishLocale from '../../messages/en.json';
@@ -31,7 +33,7 @@ const App: React.FC = () => {
 
   return (
     <IntlProvider locale={locale} messages={messages}>
-      <header>
+      <header className={style.back}>
         <button type="button" onClick={changeLocaleHandler(LOCALE.ru)}>
           <RussianFlagIcon style={{ width: '20px' }} />
         </button>

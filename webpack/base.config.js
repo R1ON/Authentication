@@ -6,11 +6,12 @@ const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const isBackend = process.env.OPTION === 'backend';
+const isSSR = process.env.OPTION === 'SSR';
 
 const filename = (extension) => (!isProduction ? `[name].${extension}` : `[name].[hash].${extension}`);
 
 const optimization = () => {
-  const config = isBackend ? {} : {
+  const config = (isBackend || isSSR) ? {} : {
     splitChunks: {
       chunks: 'all',
     },
@@ -60,7 +61,7 @@ module.exports = {
     },
     output: {
       filename: filename('js'),
-      path: path.resolve(__dirname, 'build'),
+      path: path.resolve(__dirname, '../build'),
     },
     plugins: [
       new CleanWebpackPlugin(),
@@ -79,4 +80,6 @@ module.exports = {
   },
   filename,
   isProduction,
+  isBackend,
+  isSSR,
 };

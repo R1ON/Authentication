@@ -1,4 +1,6 @@
 import express from 'express';
+import helmet from 'helmet';
+
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 
@@ -6,13 +8,13 @@ import App from '../scripts/containers/App';
 
 const app = express();
 
+app.use(helmet());
+
 app.get('*', (request, response) => {
   const markup = renderToString(<App />);
 
   // TODO: перевести файл в .ts
-  // TODO: добавить helmet + статику из public
-  // TODO: добавить css_modules
-  // TODO: избравиться от sass
+  // TODO: добавить алиасы
 
   response.send(
     `
