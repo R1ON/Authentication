@@ -57,6 +57,10 @@ module.exports = {
   config: {
     mode: 'development',
     resolve: {
+      alias: {
+        frontend: path.resolve(__dirname, '..', 'packages/frontend/src/scripts'),
+        backend: path.resolve(__dirname, '..', 'packages/backend/src'),
+      },
       extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     },
     output: {

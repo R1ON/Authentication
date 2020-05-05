@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { IntlProvider } from 'react-intl';
 
-import RegistrationFormContainer from './RegistrationFormContainer';
+// TODO: когда наиграюсь с алиасами,
+// TODO: тогда нужно будет вернуть нормальный импорт './RegistrationFormContainer';
+import RegistrationFormContainer from 'frontend/containers/RegistrationFormContainer';
 
 import style from './test.module.css';
 
 import { RussianFlagIcon, AmericanFlagIcon } from '../icons';
+
 import russianLocale from '../../messages/ru.json';
 import englishLocale from '../../messages/en.json';
 
