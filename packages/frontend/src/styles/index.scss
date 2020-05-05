@@ -1,4 +1,4 @@
-@import './vars';
+@import "vars";
 
 #root {
   width: 100vw;
@@ -13,16 +13,12 @@
   align-items: center;
 
   height: inherit;
-  background: $bg-light-gray;
-
-  &__form {
-
-  }
+  //background: var(--bg-light-gray);
 }
 
 .form {
   padding: 10px 20px;
   border-radius: 5px;
-  background: $bg-white;
+  background: lighten($bg-white, 40%);
   box-shadow: -15px 10px 30px -8px rgba(0, 0, 0, .2);
 }

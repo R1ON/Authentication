@@ -3,7 +3,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 
-const { config, filename, isProduction } = require('../../webpack-common.config');
+const { config, filename, isProduction } = require('./base.config');
 
 const PORT = 8080;
 
@@ -16,11 +16,13 @@ const optimization = () => (
   } : {}
 );
 
+const frontendFolderPath = path.resolve(__dirname, '../packages/frontend/src');
+
 module.exports = {
   ...config,
-  context: path.resolve(__dirname, 'src'),
+  context: frontendFolderPath,
   entry: {
-    client: ['@babel/polyfill', './scripts/index.tsx'],
+    client: ['@babel/polyfill', path.resolve(frontendFolderPath, 'scripts/index.tsx')],
   },
   plugins: [
     ...config.plugins,
@@ -28,7 +30,7 @@ module.exports = {
       filename: filename('css'),
     }),
     new HTMLWebpackPlugin({
-      template: path.resolve(__dirname, 'src/public/index.html'),
+      template: path.resolve(frontendFolderPath, 'public/index.html'),
       minify: {
         collapseWhitespace: isProduction,
       },
@@ -42,7 +44,20 @@ module.exports = {
     rules: [
       ...config.module.rules,
       {
-        test: /\.(css|s[ac]ss)$/,
+        test: /\.module.s?css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(s?css)$/,
+        exclude: /\.module.(s?css)$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -65,5 +80,5 @@ module.exports = {
     port: PORT,
     hot: !isProduction,
   },
-  devtool: isProduction ? '' : 'source-map',
+  devtool: isProduction && 'source-map',
 };

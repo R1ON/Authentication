@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AmericanFlagIcon: React.FC = ({ ...properties }) => (
+const AmericanFlagIcon: React.FC = (properties) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" {...properties}>
     <path
       d="M473.655 88.276h-435.3C17.167 88.276 0 105.443 0 126.62v258.76c0 21.177 17.167 38.345 38.345 38.345h435.3c21.177 0 38.345-17.167 38.345-38.345V126.62c0-21.178-17.167-38.345-38.345-38.345z"
