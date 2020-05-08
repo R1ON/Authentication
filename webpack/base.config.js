@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
 
@@ -9,6 +10,7 @@ const MinimizeStats = require('./minimizeStats');
 const isProduction = process.env.NODE_ENV === 'production';
 const isBackend = process.env.OPTION === 'backend';
 const isSSR = process.env.OPTION === 'ssr';
+const isStats = process.env.OPTION === 'stats';
 
 const statsFilename = path.resolve(__dirname, '../packages/frontend/src/server/stats.json');
 
@@ -60,11 +62,14 @@ const jsLoaders = () => {
 
 const plugins = [];
 
+plugins.push(new CleanWebpackPlugin());
+
 if (isBackend) {
   plugins.push(new Dotenv());
 }
 
-if (isSSR) {
+if (isSSR && isProduction) {
+  fs.writeFileSync(statsFilename, '{}');
   plugins.push(
     new BundleAnalyzerPlugin({
       statsFilename,
@@ -79,8 +84,6 @@ if (isSSR) {
   plugins.push(new MinimizeStats(statsFilename));
 }
 
-plugins.push(new CleanWebpackPlugin());
-
 module.exports = {
   config: {
     mode: isProduction ? 'production' : 'development',
@@ -89,7 +92,7 @@ module.exports = {
         frontend: path.resolve(__dirname, '..', 'packages/frontend/src/scripts'),
         backend: path.resolve(__dirname, '..', 'packages/backend/src'),
       },
-      extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+      extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.mjs'],
     },
     output: {
       filename: filename('js'),

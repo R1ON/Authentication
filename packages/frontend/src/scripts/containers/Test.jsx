@@ -1,3 +1,9 @@
 import universal from 'react-universal-component';
 
-export default universal(() => import('./App'));
+const LandingPage = universal(() => import('./App'), {
+  loading: () => 'loading',
+});
+
+export default () => (
+  <div><LandingPage /></div>
+);
