@@ -1,20 +1,33 @@
 import express from 'express';
 import helmet from 'helmet';
 
-import React from 'react';
-import { renderToString } from 'react-dom/server';
 
-import App from '../scripts/containers/App';
+// import React from 'react';
+// import { renderToString } from 'react-dom/server';
+import { flushChunkNames } from 'react-universal-component/server';
+import flushChunks from 'webpack-flush-chunks';
+import webpackStats from './stats.json';
+// import App from '../scripts/containers/Test';
 
 const app = express();
 
 app.use(helmet());
 
-// TODO: перевести файл в .ts
-// TODO: попробовать прочитать эту разметку из public/index.html
+const chunkNames = flushChunkNames();
+const { js, styles } = flushChunks(webpackStats, { chunkNames });
 
+console.log('styles', styles)
+
+// TODO: перевести файл в .ts
+// TODO: import flushChunks from 'webpack-flush-chunks';
+// TODO: import {HelmetProvider} from 'react-helmet-async';
+// TODO: import {flushChunkNames, clearChunks} from 'react-universal-component/server';
+// TODO: https://www.npmjs.com/package/react-universal-component
+
+// хелмет будет прокидывать дескрипшн
+// и мета теги, а universal-component должен помочь с цсс_модулес
 app.get('*', (request, response) => {
-  const markup = renderToString(<App />);
+  // const markup = renderToString(<App />);
 
   response.send(
     `
@@ -27,7 +40,7 @@ app.get('*', (request, response) => {
         </head>
         <body>
           <noscript>You need to enable JavaScript to run this app.</noscript>
-          <div id="root">${markup}</div>
+          
         </body>
       </html>
     `,

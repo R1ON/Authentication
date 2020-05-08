@@ -7,14 +7,14 @@
     "frontend:packages": "yarn workspace @frontend/app packages",
     "frontend:watch": "yarn workspace @frontend/app watch",
     "frontend:build": "yarn workspace @frontend/app build",
-    "frontend:watch:SSR": "yarn workspace @frontend/app watch:SSR",
-    "frontend:build:SSR": "yarn workspace @frontend/app build:SSR",
+    "frontend:watch:SSR": "yarn workspace @frontend/app watch:ssr",
+    "frontend:build:SSR": "yarn workspace @frontend/app build:ssr",
     "--------------": "",
     "backend:packages": "yarn workspace @backend/app packages",
     "backend:watch": "yarn workspace @backend/app watch",
     "backend:build": "yarn workspace @backend/app build",
     "-------------": "",
-    "build": "yarn run frontend:build & yarn run frontend:build:SSR & yarn run backend:build",
+    "build": "yarn run frontend:build & yarn run frontend:build:ssr & yarn run backend:build",
     "clean_cache": "yarn cache clean",
     "packages": "yarn install"
   },
@@ -24,6 +24,7 @@
   "dependencies": {
     "express": "4.17.1",
     "helmet": "3.22.0",
+    "react-universal-component": "^4.0.1",
     "@babel/polyfill": "7.8.3"
   },
   "devDependencies": {
@@ -31,12 +32,13 @@
     "lerna": "3.20.2",
     "@babel/core": "7.8.3",
     "@babel/plugin-proposal-class-properties": "7.8.3",
-    "@babel/preset-env": "7.8.3",
+    "@babel/preset-env": "7.9.6",
     "@babel/preset-typescript": "7.8.3",
     "@types/express": "4.17.2",
     "@typescript-eslint/parser": "2.17.0",
     "babel-eslint": "10.0.3",
     "babel-loader": "8.0.6",
+    "babel-plugin-universal-import": "^4.0.2",
     "clean-webpack-plugin": "3.0.0",
     "cross-env": "6.0.3",
     "eslint": "6.8.0",
@@ -48,7 +50,9 @@
     "eslint-plugin-unicorn": "16.1.1",
     "typescript": "3.7.5",
     "terser-webpack-plugin": "2.3.2",
-    "webpack": "4.41.5",
-    "webpack-cli": "3.3.10"
+    "webpack": "4.43.0",
+    "webpack-cli": "3.3.10",
+    "webpack-flush-chunks": "^2.0.3",
+    "webpack-bundle-analyzer": "^3.7.0"
   }
 }
