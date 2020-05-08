@@ -7,20 +7,30 @@ const { config, isBackend, isSSR } = require('./base.config');
 // This config will be launched for the backend and for the SSR.
 const frontendFolderPath = path.resolve(__dirname, '../packages/frontend/src');
 const backendFolderPath = path.resolve(__dirname, '../packages/backend/src');
-let finalPath = backendFolderPath;
+
+const plugins = [...config.plugins];
+
+let entry = {
+  backend: ['@babel/polyfill', path.resolve(backendFolderPath, 'index.ts')],
+};
 
 if (isSSR) {
-  finalPath = frontendFolderPath;
+  entry = {
+    ssr: ['@babel/polyfill', path.resolve(frontendFolderPath, 'server/index.js')],
+  };
 }
+
+if (isBackend) {
+  plugins.push(new NodemonPlugin());
+}
+
 
 module.exports = {
   ...config,
-  context: finalPath,
+  entry,
+  plugins,
+  context: isSSR ? frontendFolderPath : backendFolderPath,
   target: 'node',
-  entry: {
-    server: ['@babel/polyfill', path.resolve(finalPath, isBackend ? 'index.ts' : 'server/index.js')],
-  },
-  plugins: [...config.plugins, new NodemonPlugin()],
   externals: [nodeExternals()],
   devServer: {
     port: 8000,

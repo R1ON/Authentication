@@ -44,18 +44,6 @@ module.exports = {
     rules: [
       ...config.module.rules,
       {
-        test: /\.module.s?css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-            },
-          },
-        ],
-      },
-      {
         test: /\.(s?css)$/,
         exclude: /\.module.(s?css)$/,
         use: [

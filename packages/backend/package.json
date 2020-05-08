@@ -1,10 +1,11 @@
 {
   "name": "@backend/app",
   "version": "1.0.0",
+  "license": "MIT",
   "main": "src/index.ts",
   "scripts": {
     "watch": "cross-env NODE_ENV=development OPTION=backend webpack --watch --config ../../webpack/webpack.backend.config.js",
-    "build": "cross-env NODE_ENV=production OPTION=backend webpack --mode production --config ../../webpack/webpack.backend.config.js",
+    "build": "cross-env NODE_ENV=production OPTION=backend webpack --config ../../webpack/webpack.backend.config.js",
     "packages": "yarn install"
   },
   "dependencies": {
