@@ -1,49 +1,43 @@
 import express from 'express';
 import helmet from 'helmet';
+import path from 'path';
+import fs from 'fs';
 
 import React from 'react';
 import { renderToString } from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom';
 
-import { clearChunks, flushChunkNames } from 'react-universal-component/server';
-import flushChunks from 'webpack-flush-chunks';
-import webpackStats from './stats.json';
+import Test from 'frontend/containers/Test';
 
-import Test from '../scripts/containers/Test';
+// Путь идет относительно папки frontend
+const buildFolderPath = path.resolve('../../build/client');
 
 const app = express();
-
 app.use(helmet());
+app.use(express.static(buildFolderPath));
 
-// TODO: сейчас но не запускается, потому что что-то не так с universal импортом
-
-// TODO: перевести файл в .ts
-
-// хелмет будет прокидывать дескрипшн
-// и мета теги, а universal-component должен помочь с цсс_модулес
 app.get('*', (request, response) => {
-  const markup = renderToString(<Test />);
-  clearChunks();
-  const chunkNames = flushChunkNames();
-  const { js, styles } = flushChunks(webpackStats, { chunkNames });
+  fs.readFile(buildFolderPath, 'utf-8', (error, data) => {
+    if (error) {
+      const errorMessage = 'Error reading index.html file';
+      console.log(errorMessage, error);
 
-  response.send(
-    `
-      <!DOCTYPE html>
-      <html lang="ru">
-        <head>
-          <meta charset="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <title>TEST SSR</title>
-          ${styles}
-        </head>
-        <body>
-          <noscript>You need to enable JavaScript to run this app.</noscript>
-          <div id="root">${markup}</div>
-          ${js}
-        </body>
-      </html>
-    `,
-  );
+      return response.status(500).send(errorMessage);
+    }
+
+    const markup = renderToString(
+      <StaticRouter location={request.url}>
+        <Test />
+      </StaticRouter>,
+    );
+
+    return response.send(
+      data.replace(
+        '<div id="root"></div>',
+        `<div id="root">${markup}</div>`,
+      ),
+    );
+  });
 });
 
 app.listen(3000, () => {

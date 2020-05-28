@@ -1,23 +1,28 @@
-const fs = require('fs');
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
 
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
-const MinimizeStats = require('./minimizeStats');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
-const isBackend = process.env.OPTION === 'backend';
-const isSSR = process.env.OPTION === 'ssr';
-const isStats = process.env.OPTION === 'stats';
 
-const statsFilename = path.resolve(__dirname, '../packages/frontend/src/server/stats.json');
+const isBackend = process.env.OPTION === 'backend';
+
+// const isClient = process.env.OPTION === 'client'; // single-page-application
+const isServer = process.env.OPTION === 'server'; // server-side-render
+
+let buildFolderName = 'client';
+
+if (isServer) {
+  buildFolderName = 'server';
+} else if (isBackend) {
+  buildFolderName = 'backend';
+}
 
 const filename = (extension) => (!isProduction ? `[name].${extension}` : `[name].[hash].${extension}`);
 
 const optimization = () => {
-  const config = (isBackend || isSSR) ? {} : {
+  const config = (isBackend || isServer) ? {} : {
     splitChunks: {
       chunks: 'all',
     },
@@ -68,22 +73,6 @@ if (isBackend) {
   plugins.push(new Dotenv());
 }
 
-if (isSSR && isProduction) {
-  fs.writeFileSync(statsFilename, '{}');
-  plugins.push(
-    new BundleAnalyzerPlugin({
-      statsFilename,
-      analyzerMode: 'disabled',
-      generateStatsFile: true,
-      statsOptions: {
-        reasons: false,
-        source: false,
-      },
-    }),
-  );
-  plugins.push(new MinimizeStats(statsFilename));
-}
-
 module.exports = {
   config: {
     mode: isProduction ? 'production' : 'development',
@@ -92,25 +81,14 @@ module.exports = {
         frontend: path.resolve(__dirname, '..', 'packages/frontend/src/scripts'),
         backend: path.resolve(__dirname, '..', 'packages/backend/src'),
       },
-      extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.mjs'],
+      extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     },
     output: {
       filename: filename('js'),
-      path: path.resolve(__dirname, '../build'),
+      path: path.resolve(__dirname, `../build/${buildFolderName}`),
     },
     plugins,
     optimization: optimization(),
-    stats: {
-      // TODO: прочитать про это
-      // copied from `'minimal'`
-      all: false,
-      modules: true,
-      maxModules: 0,
-      errors: true,
-      warnings: true,
-      // our additional options
-      timings: true,
-    },
     module: {
       rules: [
         {
@@ -137,5 +115,5 @@ module.exports = {
   filename,
   isProduction,
   isBackend,
-  isSSR,
+  isServer,
 };

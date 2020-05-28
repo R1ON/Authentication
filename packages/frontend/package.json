@@ -3,21 +3,22 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "watch": "cross-env NODE_ENV=development webpack-dev-server --open --config ../../webpack/webpack.frontend.config.js",
-    "build": "cross-env NODE_ENV=production webpack --config ../../webpack/webpack.frontend.config.js",
-    "ssr:generate_stats": "cross-env OPTION=stats webpack --watch --config ../../webpack/webpack.backend.config.js",
-    "ssr:watch": "cross-env NODE_ENV=development OPTION=ssr webpack --watch --config ../../webpack/webpack.backend.config.js",
-    "ssr:build": "cross-env NODE_ENV=production OPTION=ssr webpack --config ../../webpack/webpack.backend.config.js",
+    "client:watch": "cross-env NODE_ENV=development OPTION=client webpack-dev-server --open --config ../../webpack/webpack.frontend.config.js",
+    "client:build": "cross-env NODE_ENV=production OPTION=client webpack --config ../../webpack/webpack.frontend.config.js",
+    "server:watch": "cross-env NODE_ENV=development OPTION=server webpack --watch --config ../../webpack/webpack.backend.config.js",
+    "server:build": "cross-env NODE_ENV=production OPTION=server webpack --config ../../webpack/webpack.backend.config.js",
+    "watch": "yarn run client:watch & yarn run server:watch",
+    "build": "yarn run client:build & yarn run server:build",
     "packages": "yarn install"
   },
   "dependencies": {
     "axios": "0.19.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "4.14.1",
     "normalize.css": "8.0.1",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-intl": "3.12.0",
-    "sass-loader": "^8.0.2"
+    "sass-loader": "8.0.2"
   },
   "devDependencies": {
     "@babel/preset-react": "7.8.3",

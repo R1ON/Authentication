@@ -3,7 +3,8 @@
   "extends": [
     "airbnb",
     "plugin:react/recommended",
-    "plugin:unicorn/recommended"
+    "plugin:unicorn/recommended",
+    "plugin:import-name/recommended"
   ],
   "plugins": ["unicorn", "react"],
   "parserOptions": {
