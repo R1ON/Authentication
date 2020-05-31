@@ -14,10 +14,10 @@ const buildFolderPath = path.resolve('../../build/client');
 
 const app = express();
 app.use(helmet());
-app.use(express.static(buildFolderPath));
+app.use(express.static(buildFolderPath, { index: false }));
 
 app.get('*', (request, response) => {
-  fs.readFile(buildFolderPath, 'utf-8', (error, data) => {
+  fs.readFile(`${buildFolderPath}/index.html`, 'utf-8', (error, data) => {
     if (error) {
       const errorMessage = 'Error reading index.html file';
       console.log(errorMessage, error);
@@ -31,7 +31,7 @@ app.get('*', (request, response) => {
       </StaticRouter>,
     );
 
-    return response.send(
+    return response.status(200).send(
       data.replace(
         '<div id="root"></div>',
         `<div id="root">${markup}</div>`,
