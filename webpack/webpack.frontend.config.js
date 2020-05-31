@@ -18,6 +18,16 @@ const optimization = () => (
 
 const frontendFolderPath = path.resolve(__dirname, '../packages/frontend/src');
 
+const postCssLoader = {
+  loader: 'postcss-loader',
+  options: {
+    sourceMap: true,
+    config: {
+      path: path.resolve(frontendFolderPath, '..', 'postcss.config.js'),
+    },
+  },
+};
+
 module.exports = {
   ...config,
   context: frontendFolderPath,
@@ -55,6 +65,21 @@ module.exports = {
             },
           },
           'css-loader',
+          postCssLoader,
+          'sass-loader',
+        ],
+      },
+      {
+        test: /\.module.s?css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            },
+          },
+          postCssLoader,
           'sass-loader',
         ],
       },
@@ -68,5 +93,5 @@ module.exports = {
     port: PORT,
     hot: !isProduction,
   },
-  devtool: isProduction && 'source-map',
+  devtool: !isProduction && 'source-map',
 };
