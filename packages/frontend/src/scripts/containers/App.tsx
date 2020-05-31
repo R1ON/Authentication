@@ -5,7 +5,7 @@ import { IntlProvider } from 'react-intl';
 // TODO: тогда нужно будет вернуть нормальный импорт './RegistrationFormContainer';
 import RegistrationFormContainer from 'frontend/containers/RegistrationFormContainer';
 
-import style from './test.module.css';
+import style from './test.module.scss';
 
 import { RussianFlagIcon, AmericanFlagIcon } from '../icons';
 

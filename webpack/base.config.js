@@ -96,19 +96,6 @@ module.exports = {
           exclude: /node_modules/,
           use: jsLoaders(),
         },
-        {
-          test: /\.module.s?css$/,
-          use: [
-            'style-loader',
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-              },
-            },
-            'sass-loader',
-          ],
-        },
       ],
     },
   },

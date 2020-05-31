@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "client:watch": "cross-env NODE_ENV=development OPTION=client webpack-dev-server --open --config ../../webpack/webpack.frontend.config.js",
+    "client:watch": "cross-env NODE_ENV=development OPTION=client webpack-dev-server --config ../../webpack/webpack.frontend.config.js",
     "client:build": "cross-env NODE_ENV=production OPTION=client webpack --config ../../webpack/webpack.frontend.config.js",
     "server:watch": "cross-env NODE_ENV=development OPTION=server webpack --watch --config ../../webpack/webpack.backend.config.js",
     "server:build": "cross-env NODE_ENV=production OPTION=server webpack --config ../../webpack/webpack.backend.config.js",
@@ -29,6 +29,9 @@
     "mini-css-extract-plugin": "0.9.0",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "style-loader": "1.1.2",
+    "postcss-loader": "3.0.0",
+    "autoprefixer": "9.8.0",
     "webpack-dev-server": "3.10.1"
-  }
+  },
+  "browserslist": ["> 1%", "last 4 versions"]
 }
