@@ -21,7 +21,7 @@ async function start(): Promise<void> {
   console.log('Connection completed successfully');
 
   app.listen(PORT, (): void => {
-    console.log('Server started on: ', PORT);
+    console.log('Server started on:', PORT);
   });
 }
 

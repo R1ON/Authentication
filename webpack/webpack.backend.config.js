@@ -23,10 +23,12 @@ module.exports = {
   entry,
   context: isServer ? frontendFolderPath : backendFolderPath,
   target: 'node',
+  module: {
+    rules: [
+      ...config.module.rules,
+      { test: /\.(module.)?(s?css)$/, loader: 'ignore-loader' },
+    ],
+  },
   plugins: [...config.plugins, new NodemonPlugin()],
   externals: [nodeExternals()],
-  devServer: {
-    port: 8000,
-    hot: true,
-  },
 };
