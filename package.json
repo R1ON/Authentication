@@ -24,7 +24,7 @@
     "packages/*"
   ],
   "dependencies": {
-    "express": "4.17.1",
+    "express": "4.17.3",
     "helmet": "3.22.0",
     "@babel/polyfill": "7.8.3",
     "react-router-dom": "5.2.0"
